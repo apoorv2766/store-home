@@ -1,7 +1,6 @@
-import { Children, useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import reducer from "../Reducer/card";
 import { createContext } from "react";
-import { type } from "@testing-library/user-event/dist/type";
 
 export let cart = createContext();
 function CreateContextAPI({ children }) {
@@ -29,12 +28,11 @@ function CreateContextAPI({ children }) {
   function addToCart(arrfil) {
     dispatch({ type: "cart", payload: arrfil });
   }
-  function removeAll()
-  {
-         dispatch({type:"removeAll"})
+  function removeAll() {
+    dispatch({ type: "removeAll" });
   }
   return (
-    <cart.Provider value={{ ...state, addToCart, removeHandler,removeAll }}>
+    <cart.Provider value={{ ...state, addToCart, removeHandler, removeAll }}>
       {children}
     </cart.Provider>
   );
