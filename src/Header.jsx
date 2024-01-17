@@ -1,5 +1,5 @@
 import React from "react";
-import "../Component/Css.css/Header.css";
+// import "../Component/Css.css/Header.css";
 import { Link } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
@@ -29,7 +29,6 @@ const Header = () => {
             aria-controls="navbarNav"
             aria-expanded="false"
             aria-label="Toggle navigation"
-            
           >
             <i className="fas fa-bars"></i>
           </button>
