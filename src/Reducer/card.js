@@ -2,7 +2,6 @@ function reducer(state, action) {
   switch (action.type) {
     case "cart":
       let { tittle, img, Price, id } = action.payload;
-      console.log(action.payload);
 
       let cartValue = { tittle, img, Price, id };
       return { ...state, cartData: [...state.cartData, cartValue] };

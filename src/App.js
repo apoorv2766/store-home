@@ -10,13 +10,15 @@ import { mymobiles } from "./Component/Product_Array";
 import { createContext, useState } from "react";
 import Cart from "./Component/Cart";
 import SinglePage from "./Component/SinglePage";
-import Header from "./Header";
+import Header from "./Component/Header";
 export const ProductContext = createContext();
 
 function App() {
   const product_spread = [...mymobiles];
   const [item, setitem] = useState(product_spread);
+  // console.log(item);
   const [sortlist, setsortlist] = useState();
+  console.log(sortlist);
   function sortCategory(getValue) {
     const filterCat = product_spread.filter((e) => {
       if (getValue === "All") {
@@ -62,9 +64,13 @@ function App() {
   function searchHandler(e) {
     let inputValue = e.target.value;
     let searchFilter = product_spread.filter((e) => {
-      let inputLower = e.tittle.trim().toLowerCase();
+      let inputLower = e.P_name.trim().toLowerCase();
       let inputLower1 = inputValue.trim().toLowerCase();
-      if (inputLower.indexOf(inputLower1) > -1) {
+      let inputLower2 = e.tittle.trim().toLowerCase();
+      if (
+        inputLower.indexOf(inputLower1) > -1 ||
+        inputLower2.indexOf(inputLower1) > -1
+      ) {
         return e;
       }
     });

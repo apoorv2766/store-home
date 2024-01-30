@@ -1,5 +1,4 @@
 import React from "react";
-// import "../Component/Css.css/Header.css";
 import { Link } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
@@ -7,10 +6,10 @@ const Header = () => {
   return (
     <>
       <nav
-        className="navbar navbar-expand-lg navbar-light bg-light"
-        style={{ position: "sticky", top: "0px", zIndex: "2" }}
+        className="navbar navbar-expand-lg navbar-light bg-light position-sticky top-0 "
+        style={{ zIndex: "2" }}
       >
-        <div className="container-fluid">
+        <div className="container-fluid h-25">
           <Link to="/Home" className="nav-link">
             <b
               style={{
@@ -22,13 +21,10 @@ const Header = () => {
             </b>
           </Link>
           <button
-            className="navbar-toggler "
+            className="navbar-toggler"
             type="button"
             data-mdb-toggle="collapse"
             data-mdb-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
           >
             <i className="fas fa-bars"></i>
           </button>
@@ -61,7 +57,7 @@ const Header = () => {
               </li>
               <li
                 className="nav-item"
-                style={{ fontSize: "25px", marginTop: "-7px" }}
+                style={{ fontSize: "2rem", marginTop: "-10px" }}
               >
                 <Link to="/cart" className="nav-link">
                   <AiOutlineShoppingCart />

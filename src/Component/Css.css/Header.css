@@ -5,7 +5,7 @@
 } */
 #navbarNav {
   /* border: 2px solid; */
-   justify-content: end; 
+  justify-content: end;
   font-size: 19px;
 }
 
@@ -68,7 +68,7 @@
   display: flex;
   justify-content: center;
   background-color: white;
-  }
+}
 
 #model {
   color: rgb(17, 17, 17);
@@ -83,17 +83,15 @@
   padding: 40px;
   padding-left: 5rem;
 }
-#categorycolor
-{
+#categorycolor {
   color: black;
 }
-#categorycolor:hover
-{
+#categorycolor:hover {
   color: blue;
 }
-#item
-{
+#item {
   display: flex;
   justify-content: space-evenly;
   font-size: 20px;
 }
+

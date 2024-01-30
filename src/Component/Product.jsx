@@ -2,179 +2,92 @@ import React, { useContext, useState } from "react";
 import "../Component/Css.css/Header.css";
 import { ProductContext } from "../App";
 import { Link } from "react-router-dom";
-import { AiOutlineSearch } from "react-icons/ai";
-import CategoryComp from "./CategoryComp";
 import { cart } from "../Context/CartContext";
+import Category from "./Category";
 
 const Product = () => {
   let { addToCart } = useContext(cart);
-  const {
-    item,
-    searchHandler,
-    sortHandlerAZ,
-    sortHandlerZA,
-    sortHandlerLH,
-    sortHandlerHL,
-    arrResult,
-  } = useContext(ProductContext);
+  const { item, arrResult } = useContext(ProductContext);
 
   return (
-    <>
+    <div className="d-flex w-100">
+      <div style={{ position: "fixed", left: "0", width: "15%" }} className="">
+        <Category />
+      </div>
+
       <div
+        className="d-flex"
         style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 5fr",
+          position: "relative",
+          left: "15%",
+          width: "85%",
         }}
       >
-        <div style={{}}>
-          <div
-            className="d-flex input-group container_fluid"
-            style={{
-              marginTop: "3vh",
-              width: "80%",
-              paddingLeft: "10px",
-              position: "relative",
-            }}
-          >
-            <input
-              type="search"
-              className="form-control rounded"
-              aria-label="Search"
-              aria-describedby="search-addon"
-              onChange={searchHandler}
-              placeholder="search..."
-            />
-            <AiOutlineSearch
-              style={{
-                position: "absolute",
-                right: "10px",
-                top: "30%",
-                zIndex: "99",
-              }}
-            />
-          </div>
-          <div id="categoryLink" style={{ margin: "2vh" }}>
-            <h5>
-              <b>Category:</b>
-            </h5>
-            <CategoryComp />
-          </div>
-          <div id="sorting" style={{ margin: "2vh" }}>
-            <h5>
-              <b>Filter:</b>
-            </h5>
-            <div>
-              <Link
-                id="categorycolor"
-                onClick={() => {
-                  sortHandlerAZ();
-                }}
-              >
-                A-Z
-              </Link>
-            </div>
-            <div>
-              <Link
-                id="categorycolor"
-                onClick={() => {
-                  sortHandlerZA();
-                }}
-              >
-                Z-A
-              </Link>
-            </div>
-            <div>
-              <Link id="categorycolor" onClick={sortHandlerLH}>
-                Low-High
-              </Link>
-            </div>
-            <div>
-              <Link id="categorycolor" onClick={sortHandlerHL}>
-                High-Low
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div
-          className="container_fluid"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "auto auto auto auto",
-            gap: "10px",
-            marginRight: "10px",
-          }}
-        >
+        <div>
           {item.length == 0 ? (
-            <div className="container m-3 p-1 c-red">
-              <p>no match found!!!</p>
+            <div className="container m-3 p-1" style={{ height: "80vh" }}>
+              <h2>No such match found!!!</h2>
             </div>
           ) : (
             ""
           )}
-
-          {arrResult.map((elem, i) => {
-            let { img, id, tittle, Price, P_name, Rating } = elem;
+        </div>
+        <div className="d-flex flex-wrap gap-2 m-lg-4">
+          {arrResult.map((item, i) => {
             return (
-              <div className="card mb-1 mt-3" key={i}>
-                <div className="row g-0">
-                  <div className="hover14 h-50 w-auto">
-                    <Link to={`/singlepage/${elem.id}`}>
-                      <figure>
-                        <img
-                          src={img}
-                          alt=""
-                          style={{
-                            height: "130px",
-                            width: "110%",
-                            marginTop: "4vh",
-                            paddingLeft: "10px",
-                          }}
-                        />
-                      </figure>
-                    </Link>
-                  </div>
+              <Link to={`/singlepage/${item.id}`}>
+                <div key={i}>
                   <div
-                    className="col-md-7"
+                    class="card"
                     style={{
-                      width: "60%",
-                      paddingLeft: "10px",
+                      width: "18rem",
+                      padding: "1rem",
                     }}
+                    key={i}
                   >
-                    <div
-                      style={{
-                        marginLeft: "25px",
-                        paddingTop: "3vh",
-                      }}
-                    >
-                      <h6>Model:{tittle}</h6>
-                      <>MRP:{Price}</>
-                      <br />
-                      <>Brand:{P_name}</>
-                      <br />
-                      <>Rating:{Rating}</>
+                    <div>
+                      <img
+                        src={item.img}
+                        alt="Card image cap"
+                        width="90%"
+                        height="150px"
+                      />
+                    </div>
+                    <div class="card-body p-1">
+                      MRP:
+                      <span
+                        className="text-black"
+                        style={{ fontSize: "1.7rem" }}
+                      >
+                        {item.Price}
+                      </span>
+                      <p class="card-title" style={{ fontSize: "1rem" }}>
+                        Tittle:{item.tittle}
+                      </p>
+                      <p class="card-text p-0 m-0" style={{ fontSize: "1rem" }}>
+                        Brand:{item.P_name}
+                      </p>
                       <Link to="/cart">
-                        <button
-                          className="btn btn-warning"
-                          style={{
-                            fontSize: "11px",
-                            marginTop: "5px",
-                          }}
+                        <a
+                          href="#"
+                          class="btn btn-primary w-100"
+                          style={{ marginTop: "0.8rem" }}
                           onClick={() => {
-                            addToCart(elem);
+                            addToCart(item);
                           }}
                         >
                           Add To Cart
-                        </button>
+                        </a>
                       </Link>
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
