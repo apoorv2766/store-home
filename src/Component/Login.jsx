@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 
-const SignUp = () => {
-  const { register } = useAuth();
+const Login = () => {
+  const { login } = useAuth();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -16,7 +16,7 @@ const SignUp = () => {
     setError("");
     setLoading(true);
     try {
-      await register(form.name, form.email, form.password);
+      await login(form.email, form.password);
       navigate("/Product");
     } catch (err) {
       setError(err.message);
@@ -29,22 +29,10 @@ const SignUp = () => {
     <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "80vh" }}>
       <div className="card p-4 shadow" style={{ width: "100%", maxWidth: "420px" }}>
         <h3 className="mb-4 text-center" style={{ color: "rgb(14,103,183)" }}>
-          Create Account
+          Log In
         </h3>
         {error && <div className="alert alert-danger py-2">{error}</div>}
         <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label className="form-label">Full Name</label>
-            <input
-              type="text"
-              className="form-control"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              required
-              placeholder="John Doe"
-            />
-          </div>
           <div className="mb-3">
             <label className="form-label">Email address</label>
             <input
@@ -66,8 +54,7 @@ const SignUp = () => {
               value={form.password}
               onChange={handleChange}
               required
-              minLength={6}
-              placeholder="Min. 6 characters"
+              placeholder="Your password"
             />
           </div>
           <button
@@ -75,17 +62,16 @@ const SignUp = () => {
             className="btn btn-primary w-100"
             disabled={loading}
           >
-            {loading ? "Creating account…" : "Sign Up"}
+            {loading ? "Logging in…" : "Log In"}
           </button>
         </form>
         <p className="text-center mt-3 mb-0">
-          Already have an account?{" "}
-          <Link to="/Login">Log in</Link>
+          Don't have an account?{" "}
+          <Link to="/SignUp">Sign up</Link>
         </p>
       </div>
     </div>
   );
 };
 
-export default SignUp;
-
+export default Login;
