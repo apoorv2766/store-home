@@ -1,142 +1,124 @@
-import React from "react";
+﻿import React from "react";
 import { Link } from "react-router-dom";
-import "../Component/Css.css/Header.css";
 
-const Footer = () => {
-  return (
-    <>
-      <footer
-        className="text-center text-lg-start bg-light text-muted"
-        style={{ position: "sticky", top: "0" }}
-      >
-        <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-          <div className="me-5 d-none d-lg-block">
-            <span>Get connected with us on social networks:</span>
-          </div>
-
-          <div>
-            <a
-              href="https://www.facebook.com/login/"
-              className="me-4 text-reset"
-            >
-              <i className="fab fa-facebook-f"></i>
-            </a>
-            <a
-              href="https://twitter.com/home/killer2766"
-              className="me-4 text-reset"
-            >
-              <i className="fab fa-twitter"></i>
-            </a>
-            <a href="" className="me-4 text-reset">
-              <i className="fab fa-google"></i>
-            </a>
-            <a href="" className="me-4 text-reset">
-              <i className="fab fa-instagram"></i>
-            </a>
-            <a href="" className="me-4 text-reset">
-              <i className="fab fa-linkedin"></i>
-            </a>
-            <a href="" className="me-4 text-reset">
-              <i className="fab fa-github"></i>
-            </a>
-          </div>
-        </section>
-
-        <section className="">
-          <div className="container text-center text-md-start mt-5">
-            <div className="row mt-3">
-              <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                <h6 className="text-uppercase fw-bold mb-4">
-                  <i className="fas fa-gem me-3"></i>Store@Home
-                </h6>
-                <p>
-                  This is a Electronics Ecommerce Platform where all the
-                  Products Customers can purchase like Mobiles Laptop Television
-                  Wahing Machine.
-                </p>
-              </div>
-              <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                <h6 className="text-uppercase fw-bold mb-4">Products</h6>
-                <p>
-                  <Link to="/Product" className="nav-link">
-                    Mobiles
-                  </Link>
-                </p>
-                <p>
-                  <Link to="/laptop" className="nav-link">
-                    Laptop
-                  </Link>
-                </p>
-                <p>
-                  <Link to="/Washing_Machine" className="nav-link">
-                    Washing Machine
-                  </Link>
-                </p>
-                <p>
-                  <Link to="/Television" className="nav-link">
-                    Television
-                  </Link>
-                </p>
-              </div>
-
-              <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                <h6 className="text-uppercase fw-bold mb-4">Useful links</h6>
-                <p>
-                  <a href="#!" className="text-reset">
-                    Product
-                  </a>
-                </p>
-                <p>
-                  <a href="#!" className="text-reset">
-                    Home
-                  </a>
-                </p>
-                <p>
-                  <a href="#!" className="text-reset">
-                    Signup
-                  </a>
-                </p>
-                <p>
-                  <a href="#!" className="text-reset">
-                    Help
-                  </a>
-                </p>
-              </div>
-
-              <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
-                <p>
-                  <i className="fas fa-home me-3"></i> 2nd Cross Kundanhalli
-                  Colony
-                  <p style={{ marginLeft: "40px" }}>Brookfield Bangalore</p>
-                </p>
-                <p>
-                  <i className="fas fa-envelope me-3"></i>
-                  apoorv2766@outlook.com
-                </p>
-                <p>
-                  <i className="fas fa-phone me-3"></i> + 91 8574537246
-                </p>
-                <p>
-                  <i className="fas fa-print me-3"></i> + 91 7007314074
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <div
-          className="text-center p-4"
-          style={{ backgroundColor: "rgba(0, 0, 0, 0.05)" }}
-        >
-          © 2023 Copyright:
-          <a className="text-reset fw-bold" href="https://mdbootstrap.com/">
-            Store@home.in
-          </a>
-        </div>
-      </footer>
-    </>
-  );
+const COL = { display: "flex", flexDirection: "column", gap: "10px" };
+const LINK_STYLE = {
+  color: "rgba(255,255,255,.6)", textDecoration: "none",
+  fontSize: "0.88rem", transition: "color .15s",
 };
+const HEADING = {
+  color: "#ffd200", fontWeight: 700, fontSize: "0.75rem",
+  letterSpacing: "2px", textTransform: "uppercase", marginBottom: "6px",
+};
+
+const SOCIALS = [
+  { label: "FB",  href: "https://www.facebook.com/login/",         icon: "f" },
+  { label: "TW",  href: "https://twitter.com/",                    icon: "\uD835\uDD4F" },
+  { label: "IG",  href: "https://instagram.com/",                  icon: "\uD83D\uDCF7" },
+  { label: "LI",  href: "https://linkedin.com/",                   icon: "in" },
+  { label: "GH",  href: "https://github.com/",                     icon: "\uD83D\uDC08" },
+];
+
+const Footer = () => (
+  <footer style={{
+    background: "linear-gradient(180deg,#1a1a2e 0%,#0f3460 100%)",
+    color: "rgba(255,255,255,.7)", paddingTop: "52px",
+  }}>
+    <div style={{
+      maxWidth: "1200px", margin: "0 auto", padding: "0 24px 40px",
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+      gap: "36px",
+    }}>
+
+      {/* Brand */}
+      <div style={COL}>
+        <div style={{ fontSize: "1.35rem", fontWeight: 800, color: "#ffd200", marginBottom: "4px" }}>
+          &#128722; Store@Home
+        </div>
+        <p style={{ fontSize: "0.85rem", lineHeight: 1.65, color: "rgba(255,255,255,.55)", margin: 0 }}>
+          Your one-stop electronics store. Mobiles, Laptops, Appliances &amp; more â€” delivered to your door.
+        </p>
+        {/* Social icons */}
+        <div style={{ display: "flex", gap: "10px", marginTop: "8px", flexWrap: "wrap" }}>
+          {SOCIALS.map(({ label, href, icon }) => (
+            <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label}
+              style={{
+                width: "34px", height: "34px", borderRadius: "8px",
+                background: "rgba(255,255,255,.1)", display: "flex",
+                alignItems: "center", justifyContent: "center",
+                color: "#fff", fontSize: "0.78rem", fontWeight: 700,
+                textDecoration: "none", transition: "background .2s",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(247,151,30,.5)")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(255,255,255,.1)")}
+            >{icon}</a>
+          ))}
+        </div>
+      </div>
+
+      {/* Categories */}
+      <div style={COL}>
+        <span style={HEADING}>Categories</span>
+        {["Mobiles", "Laptops", "Television", "Washing Machine", "Appliances"].map((c) => (
+          <Link key={c} to="/Product" style={LINK_STYLE}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#ffd200")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,.6)")}
+          >&#8250; {c}</Link>
+        ))}
+      </div>
+
+      {/* Quick links */}
+      <div style={COL}>
+        <span style={HEADING}>Quick Links</span>
+        {[
+          { to: "/", label: "Home" },
+          { to: "/Product", label: "Products" },
+          { to: "/Cart", label: "My Cart" },
+          { to: "/Wishlist", label: "Wishlist" },
+          { to: "/Orders", label: "My Orders" },
+          { to: "/Profile", label: "My Account" },
+        ].map(({ to, label }) => (
+          <Link key={to} to={to} style={LINK_STYLE}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#ffd200")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,.6)")}
+          >&#8250; {label}</Link>
+        ))}
+      </div>
+
+      {/* Contact */}
+      <div style={COL}>
+        <span style={HEADING}>Contact Us</span>
+        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+          {[
+            { icon: "&#128205;", text: "2nd Cross, Kundanhalli Colony, Brookfield, Bangalore" },
+            { icon: "&#128140;", text: "apoorv2766@outlook.com" },
+            { icon: "&#128222;", text: "+91 85745 37246" },
+          ].map(({ icon, text }) => (
+            <p key={text} style={{ margin: 0, fontSize: "0.85rem", color: "rgba(255,255,255,.6)", display: "flex", gap: "8px" }}>
+              <span dangerouslySetInnerHTML={{ __html: icon }} />
+              <span>{text}</span>
+            </p>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    {/* Bottom bar */}
+    <div style={{
+      borderTop: "1px solid rgba(255,255,255,.1)",
+      padding: "16px 24px",
+      display: "flex", justifyContent: "space-between", alignItems: "center",
+      flexWrap: "wrap", gap: "8px",
+      fontSize: "0.8rem", color: "rgba(255,255,255,.4)",
+    }}>
+      <span>&#169; {new Date().getFullYear()} Store@Home. All rights reserved.</span>
+      <div style={{ display: "flex", gap: "20px" }}>
+        <Link to="/AboutUs"   style={{ color: "rgba(255,255,255,.4)", textDecoration: "none" }}>About</Link>
+        <Link to="/ContactUs" style={{ color: "rgba(255,255,255,.4)", textDecoration: "none" }}>Contact</Link>
+      </div>
+    </div>
+  </footer>
+);
 
 export default Footer;
