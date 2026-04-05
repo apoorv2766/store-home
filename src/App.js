@@ -1,4 +1,5 @@
 import "./App.css";
+import { Toaster } from "react-hot-toast";
 import Home from "./Component/Home";
 import Product from "./Component/Product";
 import { Route, Routes } from "react-router-dom";
@@ -16,6 +17,24 @@ import Checkout from "./Component/Checkout";
 import Orders from "./Component/Orders";
 import Profile from "./Component/Profile";
 export const ProductContext = createContext();
+
+const NotFound = () => (
+  <div style={{
+    display: "flex", flexDirection: "column", alignItems: "center",
+    justifyContent: "center", minHeight: "70vh",
+    backgroundColor: "#f0f2f5", gap: "14px",
+  }}>
+    <div style={{ fontSize: "5rem", lineHeight: 1 }}>&#128269;</div>
+    <h1 style={{ margin: 0, fontWeight: 900, fontSize: "3rem", color: "#1a1a2e" }}>404</h1>
+    <p style={{ margin: 0, color: "#888", fontSize: "1.05rem" }}>Oops! The page you're looking for doesn't exist.</p>
+    <a href="/" style={{
+      marginTop: "8px", padding: "11px 32px", borderRadius: "24px",
+      background: "linear-gradient(135deg,#f7971e,#ffd200)",
+      color: "#1a1a1a", fontWeight: 700, textDecoration: "none",
+      boxShadow: "0 4px 18px rgba(247,151,30,.35)",
+    }}>&#8592; Back to Home</a>
+  </div>
+);
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8000";
 
@@ -48,7 +67,7 @@ function App() {
     const filterCat = product_spread.filter((e) => {
       if (getValue === "All") {
         return e;
-      } else if (getValue == e.Category) {
+      } else if (getValue === e.Category) {
         return e;
       }
     });
@@ -111,6 +130,29 @@ function App() {
           arrResult,
         }}
       >
+        <Toaster
+          position="bottom-center"
+          gutter={12}
+          toastOptions={{
+            duration: 3000,
+            style: {
+              borderRadius: "14px",
+              fontWeight: 700,
+              fontSize: "0.95rem",
+              padding: "14px 20px",
+              maxWidth: "90vw",
+              boxShadow: "0 8px 32px rgba(0,0,0,.18)",
+            },
+            success: {
+              style: { background: "#1a1a2e", color: "#ffd200" },
+              iconTheme: { primary: "#ffd200", secondary: "#1a1a2e" },
+            },
+            error: {
+              style: { background: "#fff5f5", color: "#e52d27", border: "1.5px solid #ffcccc" },
+              iconTheme: { primary: "#e52d27", secondary: "#fff5f5" },
+            },
+          }}
+        />
         <Header />
         <Routes>
           <Route path="/Product" element={<Product />} />
@@ -127,6 +169,7 @@ function App() {
           <Route path="/Orders" element={<Orders />} />
           <Route path="/Orders/:orderId" element={<Orders />} />
           <Route path="/Profile" element={<Profile />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
       </ProductContext.Provider>
